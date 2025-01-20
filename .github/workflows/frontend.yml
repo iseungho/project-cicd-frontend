@@ -1,0 +1,22 @@
+name: React CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  react-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      -name: Checkout Repository Resources
+        uses: actions/checkout@v2
+
+      - name: .env 환경 변수 동적 생성
+        run : |
+          echo "${{ secrets.CLIENT_ENV }}" > .env
+          pwd
+          ls -al
